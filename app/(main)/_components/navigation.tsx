@@ -6,9 +6,12 @@ import { usePathname } from "next/navigation";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import UserItem from "./user-item";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 export const Navigation = () => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const pathname = usePathname();
+  const documents = useQuery(api.documents.get);
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -52,7 +55,7 @@ export const Navigation = () => {
       sidebarRef.current.style.width = isMobile ? "100%" : "240px";
       navbarRef.current.style.setProperty(
         "width",
-        isMobile ? "0" : "calc(100%-240px)"
+        isMobile ? "0" : "calc(100%-240px)",
       );
       navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
 
@@ -91,17 +94,17 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[999]",
-          isResetting && "transition-all ease-in-out duration-300",
-          isMobile && "w-0"
+          "group/sidebar relative z-[999] flex h-full w-60 flex-col overflow-y-auto bg-secondary",
+          isResetting && "transition-all duration-300 ease-in-out",
+          isMobile && "w-0",
         )}
       >
         <div
           onClick={collapse}
           role="button"
           className={cn(
-            "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
-            isMobile && "opacity-100"
+            "absolute right-2 top-3 h-6 w-6 rounded-sm text-muted-foreground opacity-0 transition hover:bg-neutral-300 group-hover/sidebar:opacity-100 dark:hover:bg-neutral-600",
+            isMobile && "opacity-100",
           )}
         >
           <ChevronsLeft className="h-6 w-6 " />
@@ -113,7 +116,7 @@ export const Navigation = () => {
           <p>docs</p>
         </div>
         <div
-          className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0"
+          className="absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-primary/10 opacity-0 transition group-hover/sidebar:opacity-100"
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
         />
@@ -121,12 +124,12 @@ export const Navigation = () => {
       <div
         ref={navbarRef}
         className={cn(
-          "absolute top-0 z-[9999] left-60 w-[calc(100%-240px)]",
-          isResetting && "transition-all ease-in-out duration-300",
-          isMobile && "left-0 w-full"
+          "absolute left-60 top-0 z-[9999] w-[calc(100%-240px)]",
+          isResetting && "transition-all duration-300 ease-in-out",
+          isMobile && "left-0 w-full",
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
+        <nav className="w-full bg-transparent px-3 py-2">
           {isCollapsed && (
             <MenuIcon
               role="button"
