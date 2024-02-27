@@ -52,7 +52,7 @@ const UserItem = () => {
        </Avatar>
       </div>
       <div className="space-y-0">
-       <p className="line-clamp-1 text-sm">{user?.fullName}`s Notion</p>
+       <p className="line-clamp-1 text-sm">{user?.username}`s Notion</p>
       </div>
      </div>
     </div>
