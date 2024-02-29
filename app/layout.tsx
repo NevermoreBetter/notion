@@ -5,50 +5,53 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "@/components/convex-provider";
 import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/modal-provider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Notion",
-  description: "Connected workspace",
-  icons: {
-    icon: [
-      {
-        media: "(prefers-color-scheme: light)",
-        url: "/logo.svg",
-        href: "/logo.svg",
-      },
-      {
-        media: "(prefers-color-scheme: dark)",
-        url: "/logo-dark.svg",
-        href: "/logo-dark.svg",
-      },
-    ],
-  },
+ title: "Notion",
+ description: "Connected workspace",
+ icons: {
+  icon: [
+   {
+    media: "(prefers-color-scheme: light)",
+    url: "/logo.svg",
+    href: "/logo.svg",
+   },
+   {
+    media: "(prefers-color-scheme: dark)",
+    url: "/logo-dark.svg",
+    href: "/logo-dark.svg",
+   },
+  ],
+ },
 };
 
 export default function RootLayout({
-  children,
+ children,
 }: Readonly<{
-  children: React.ReactNode;
+ children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ConvexClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="notion-theme"
-          >
-            <Toaster position="bottom-center" />
-            <ModalProvider/>
-            {children}
-          </ThemeProvider>
-        </ConvexClientProvider>
-      </body>
-    </html>
-  );
+ return (
+  <html lang="en" suppressHydrationWarning>
+   <body className={inter.className}>
+    <ConvexClientProvider>
+     <EdgeStoreProvider>
+      <ThemeProvider
+       attribute="class"
+       defaultTheme="system"
+       enableSystem
+       disableTransitionOnChange
+       storageKey="notion-theme"
+      >
+       <Toaster position="bottom-center" />
+       <ModalProvider />
+       {children}
+      </ThemeProvider>
+     </EdgeStoreProvider>
+    </ConvexClientProvider>
+   </body>
+  </html>
+ );
 }

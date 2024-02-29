@@ -37,7 +37,9 @@ const DocumentsPage = () => {
     alt="empty"
     className="hidden dark:block"
    />
-   <h2 className="text-lg font-medium">Welcome to {user?.username}`s Notion</h2>
+   <h2 className="text-lg font-medium">
+    Welcome to {user?.username || user?.fullName}`s Notion
+   </h2>
    <Button onClick={onCreate}>
     <PlusCircle className="mr-2 h-4 w-4" />
     Create a note

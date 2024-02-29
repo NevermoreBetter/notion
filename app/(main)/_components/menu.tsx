@@ -49,7 +49,7 @@ const Menu = ({ documentId }: IMenu) => {
      Delete
     </DropdownMenuItem>
     <DropdownMenuSeparator className="text-xs text-muted-foreground" />
-    <div>Last edited by: {user?.username}</div>
+    <div>Last edited by: {user?.username || user?.fullName}</div>
    </DropdownMenuContent>
   </DropdownMenu>
  );

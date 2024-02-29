@@ -28,7 +28,7 @@ const UserItem = () => {
        <AvatarImage src={user?.imageUrl} />
       </Avatar>
       <span className="line-clamp-1 text-start font-medium">
-       {user?.username}`s Notion
+       {user?.username || user?.fullName}`s Notion
       </span>
      </div>
 
@@ -52,7 +52,9 @@ const UserItem = () => {
        </Avatar>
       </div>
       <div className="space-y-0">
-       <p className="line-clamp-1 text-sm">{user?.username}`s Notion</p>
+       <p className="line-clamp-1 text-sm">
+        {user?.username || user?.fullName}`s Notion
+       </p>
       </div>
      </div>
     </div>
