@@ -15,14 +15,14 @@ interface IDocument {
 
 const DocumentPage = ({ params }: IDocument) => {
  const document = useQuery(api.documents.getById, {
-  documentId: params.documentid,
+  documentId: params.documentId,
  });
 
  const update = useMutation(api.documents.update);
- console.log(params.documentid);
+ console.log(params.documentId);
  const onChange = (content: string) => {
   update({
-   id: params.documentid,
+   id: params.documentId,
    content,
   });
  };
