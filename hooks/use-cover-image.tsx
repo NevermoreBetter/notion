@@ -10,7 +10,7 @@ type CoverImage = {
 
 export const useCoverImage = create<CoverImage>((set) => ({
  isOpen: false,
- onOpen: () => set({ isOpen: true }),
+ onOpen: () => set({ isOpen: true, url: undefined }),
  onClose: () => set({ isOpen: false, url: undefined }),
  onReplace: (url: string) => set({ isOpen: true, url }),
 }));

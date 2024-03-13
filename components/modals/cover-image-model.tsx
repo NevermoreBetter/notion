@@ -14,7 +14,6 @@ interface ICover {}
 
 const CoverImage = () => {
  const params = useParams();
- console.log(params);
  const update = useMutation(api.documents.update);
  const [file, setFile] = useState<File>();
  const [isSubmitting, setIsSubmitting] = useState(false);
